@@ -1,0 +1,107 @@
+CAPÍTULO SETE - PATTERN MATCHING WITH REGULAR EXPRESSION
+
+  TAREFA 1 -> STRONG PASSWORD DETECTION 
+
+import re
+
+password = input('Enter a password to test: ')
+
+def is_password_strong(password):
+    """
+    Returns a boolean indicating if the password is strong.
+    Strong passwords are defined here as 8 characters or longer,
+    contain at least one uppercase letter,
+    lowercase letter and digit.
+    """
+    
+    length_regex = re.compile(r'.{8,}')
+    uppercase_regex = re.compile(r'[A-Z]')
+    lowercase_regex = re.compile(r'[a-z]')
+    digit_regex = re.compile(r'[0-9]')
+    
+    length = length_regex.search(password) is not None
+    case = (uppercase_regex.search(password) is not None and
+        lowercase_regex.search(password) is not None)
+    digit = digit_regex.search(password) is not None
+
+    print(length and case and digit)
+    
+is_password_stong(password)
+
+  Tarefa 2 -> REGEX VERSION OF STRIP() 
+
+import re
+
+string = input("Enter a string to strip: ")
+bad_chars = input("Enter the characters you want to be striped: ")
+
+def regex_strip(string, bad_chars):
+    """
+    Replicates the usage of strip() utilizing regex.
+    
+    If no other arguments are passed other than the string to strip,
+    then whitespace characters will be removed from the beginning
+    and end of the string. Otherwise, the characters specified
+    in the second argument to the function will be removed from the string.
+    """
+    strip_regex = re.compile('[%s]' % bad_chars)
+    return strip_regex.sub('', string)
+    
+try:
+    print(regex_strip(string, bad_chars))
+except TypeError:
+    print(regex_strip(string, ' '))
+
+
+  -> PROBLEMA 
+
+import re
+ 
+def is_password_strong():
+password = input('Enter a password to test: ')
+
+def is_password_strong(password):
+     """
+     Returns a boolean indicating if the password is strong.
+ 
+     Strong passwords are defined here as 8 characters or longer,
+     contain at least one uppercase letter,
+     lowercase letter and digit.
+     """
+    password = input('Enter a password to test: ')
+     
+     length_regex = re.compile(r'.{8,}')
+     uppercase_regex = re.compile(r'[A-Z]')
+ @@ -21,4 +22,6 @@ def is_password_strong():
+         lowercase_regex.search(password) is not None)
+     digit = digit_regex.search(password) is not None
+ 
+    return(length and case and digit)
+    print(length and case and digit)
+    
+is_password_stong(password)
+
+
+CAPITULO 10 - DEBUGGING
+
+   TAREFA -> DEBUGGING COIN TOSS 
+
+import random
+
+def play():
+    guess = ''
+    sides = ['heads','tails']
+    while guess not in (sides):
+        print('Guess the coin toss! Enter heads or tails:')
+        guess = input().lower()
+    toss = random.choice(sides)
+    
+    if toss == guess:
+        print('You got it!')
+    else:
+        print('Nope! Guess again!')
+        if toss == input().lower():
+           print('You got it!')
+        else:
+            print('Nope. You are really bad at this game.')
+play()
